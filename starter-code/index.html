@@ -20,6 +20,7 @@
     </thead>
     <tbody>
       <tr class="product">
+        
         <td class="name">
           <span>IronBubble-head</span>
         </td>
@@ -30,7 +31,7 @@
     
         <td class="qty">
           <label>
-            <input type="number" value="0" min="0">
+            <input id="inp" type="number" value="0" min="0" onchange="updateSubtot()">
           </label>
         </td>
     
@@ -42,6 +43,8 @@
           <button class="btn btn-delete">Delete</button>
         </td>
       </tr>
+
+      
     </tbody>
     <!-- <tfoot>
       <tr class="new">
