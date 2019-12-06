@@ -1,17 +1,29 @@
 var $cart = document.querySelector('#cart tbody');
 var $calc = document.getElementById('calc');
 
+document.getElementById("inpID").addEventListener("change", updateSubtot);
+
+
+
+
 function updateSubtot($product) {
   // Iteration 1.1
-  let p = Number(document.getElementsByClassName("pu"));
-  let q = Number(document.getElementsByClassName("qty"));
+  
 
-  let t = document.getElementById("inp").value;
+  let p = Number(document.querySelector(".product .pu span").innerHTML); 
+  let q = Number(document.getElementById("inpID").value);           // Works just fine for one
 
-  subtotal = p * q;
-  document.getElementsByClassName("subtot").innerHTML = subtotal;
 
-  return subtotal;
+  let subTotal = p * q;
+
+  
+  document.querySelector(" .subtot span").innerHTML = subTotal;
+
+
+  console.log("P is " + p);
+  console.log("Q is " + q);
+
+  // return subtotal;
 
 }
 
