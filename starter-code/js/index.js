@@ -1,35 +1,49 @@
-var $cart = document.querySelector('#cart tbody');
-var $calc = document.getElementById('calc');
-
-document.getElementById("inpID").addEventListener("change", updateSubtot);
-
-
-
+let $cart = document.querySelector('#cart tbody');
+let $calc = document.getElementById('calc');
 
 function updateSubtot($product) {
   // Iteration 1.1
-  
+  let unitPrice = $product.querySelector(".pu span").innerHTML;
+  unitPrice = Number(unitPrice);
 
-  let p = Number(document.querySelector(".product .pu span").innerHTML); 
-  let q = Number(document.getElementById("inpID").value);           // Works just fine for one
+  let quantity = $product.querySelector(".qty input").value;
+  quantity = Number(quantity);
 
+  let subtotal = unitPrice * quantity;
 
-  let subTotal = p * q;
+  let subtotEle = $product.querySelector(".subtot span");
+  subtotEle.innerHTML = subtotal;
 
-  
-  document.querySelector(" .subtot span").innerHTML = subTotal;
-
-
-  console.log("P is " + p);
-  console.log("Q is " + q);
-
-  // return subtotal;
-
+  return subtotal;
 }
 
 function calcAll() {
   // Iteration 1.2
-  
 
+  let productsCollection = $cart.getElementsByClassName("product");
+  let $product;
+  let sumSubtotal = 0;
+
+  for (let i = 0; i < productsCollection.length; i++) {
+    $product = productsCollection[i];
+    sumSubtotal += updateSubtot($product);
+  }
+
+  let total = document.querySelector("h2 span");
+  total.innerHTML = sumSubtotal;
 }
+
+
+let objMarkedForDeletion = $cart.getElementsByClassName("btn-delete");
+
+for (let i = 0; i < objMarkedForDeletion.length; i++){
+  objMarkedForDeletion[i].onclick = function(e){
+    let row;
+    row = e.currentTarget.parentElement.parentElement;
+    $cart.removeChild(row);
+  }
+}
+
+
 $calc.onclick = calcAll;
+
