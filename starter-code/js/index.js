@@ -1,25 +1,29 @@
 let $cart = document.querySelector('#cart tbody');
 let $calc = document.getElementById('calc');
 
+
+console.log($cart);
+
+
 function updateSubtot($product) {
   // Iteration 1.1
   let unitPrice = $product.querySelector(".pu span").innerHTML;
   unitPrice = Number(unitPrice);
-
+  
   let quantity = $product.querySelector(".qty input").value;
   quantity = Number(quantity);
-
+  
   let subtotal = unitPrice * quantity;
-
+  
   let subtotEle = $product.querySelector(".subtot span");
   subtotEle.innerHTML = subtotal;
-
+  
   return subtotal;
 }
 
 function calcAll() {
   // Iteration 1.2
-
+  
   let productsCollection = $cart.getElementsByClassName("product");
   let $product;
   let sumSubtotal = 0;
@@ -34,15 +38,21 @@ function calcAll() {
 }
 
 
-let objMarkedForDeletion = $cart.getElementsByClassName("btn-delete");
 
-for (let i = 0; i < objMarkedForDeletion.length; i++){
-  objMarkedForDeletion[i].onclick = function(e){
-    let row;
-    row = e.currentTarget.parentElement.parentElement;
-    $cart.removeChild(row);
-  }
+let deleteProductList = $cart.getElementsByClassName("btn btn-delte");
+
+for (let i = 0; i < deleteProductList.length; i++) {
+  let deleteList = deleteProductList[i];
+
+  deleteList.addEventListener("click", function(event) {
+
+    let buttonClicked = event.target;
+    buttonClicked.parentElement.parentElement.remove();
+    calcAll()
+  });
+
 }
+
 
 
 $calc.onclick = calcAll;
